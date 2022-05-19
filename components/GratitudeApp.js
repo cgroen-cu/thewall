@@ -1,6 +1,4 @@
 import { useStickyState } from "../hooks/useStickyState"
-import { useState, useEffect } from "react"
-import { supabase } from "../lib/supabase"
 import History from "./History";
 import Input from "./Input";
 import styled from "styled-components"
@@ -16,53 +14,24 @@ const test = [
 export default function GratitudeApp() {
     // instead of just a default value, also provide a key
     const [data, setData] = useStickyState([], 'gratitudes');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(true);
-    
-    useEffect(() => {
-        fetchGratitudes();
-    }, [data])
+    const [dataAth, setDataAth] = useStickyState([], 'author');
 
-    const fetchGratitudes = async () => {
-        let { data, error } = await supabase
-            .from('gratitudes')
-            .select('entry, date_insert_ts')
-
-        if (error) setError(error.message)
-        else {
-            setData(data)
-            setLoading(false)
-        }
-      }
-    
-      const addGratitude = async (newGratitude) => {
-        setLoading(true)
-        if (newGratitude.length) {
-            let { data, error } = await supabase
-              .from('gratitudes')
-              .insert([
-              { entry: newGratitude },
-              ])
-            if (error) setError(error.message)
-            else { 
-                // setGratitudes([...gratitudes, {'entry':entry,'date_insert_ts':'NULL'}])
-                setLoading(false)
-            }
-          }
+    const addGratitude = (newGratitude) => {
+        setData([...data, newGratitude])
     }
 
 
     return <Wrapper>
             <DecorativeArc>
                 <Title>THE WALL</Title>
-                
+
                 {
                     data.length > 0 ? (
                     <>
                     <DecorativeLineBreak />
                     <History data={data} />
                     <DecorativeLineBreak />
-                    
+
                     <Spacer height={30} />
                     </> )
                     : (
@@ -96,7 +65,6 @@ const DecorativeArc = styled.div`
     background-color: rgb(10,10,10);
     text-align: center;
     width: min(100%, 800px);
-
     padding: 20px 10%;
 `
 
@@ -121,7 +89,6 @@ const Button = styled.button`
     padding: 15px;
     cursor: pointer;
     transition: all 200ms;
-
     &:hover {
         background-color: var(--burnt);
         color: var(--parchment);
@@ -138,4 +105,4 @@ const ImageWrapper = styled.div`
         object-fit: cover;
         display: block;
     }
-`
+` 

@@ -3,12 +3,6 @@ import styled from "styled-components"
 import { SupabaseClient } from '@supabase/supabase-js'
 
 
-function addMessageToPage () {
-
-}
-
-
-
 
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
