@@ -1,6 +1,16 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styled from "styled-components"
 
+
+function init () {
+  let { data: messages, error } = await supabase
+  .from('messages')
+  .select('*')
+
+  console.log(messages)
+}
+
+
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
     height: 100%;
