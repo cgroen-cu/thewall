@@ -41,7 +41,7 @@ export default function GratitudeApp() {
             let { data, error } = await supabase
               .from('gratitudes')
               .insert([
-              { id: user.id, entry: newGratitude },
+              { entry: newGratitude },
               ])
             if (error) setError(error.message)
             else { 
