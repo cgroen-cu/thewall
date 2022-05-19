@@ -1,14 +1,13 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styled from "styled-components"
+import { SupabaseClient } from '@supabase/supabase-js'
 
 
-function init () {
-  let { data: messages, error } = await supabase
-  .from('messages')
-  .select('*')
+function addMessageToPage () {
 
-  console.log(messages)
 }
+
+
 
 
 const GlobalStyle = createGlobalStyle`

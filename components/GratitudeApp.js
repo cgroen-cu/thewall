@@ -1,4 +1,6 @@
 import { useStickyState } from "../hooks/useStickyState"
+import { useState, useEffect } from "react"
+import { supabase } from "../lib/supabase"
 import History from "./History";
 import Input from "./Input";
 import styled from "styled-components"
@@ -14,10 +16,39 @@ const test = [
 export default function GratitudeApp() {
     // instead of just a default value, also provide a key
     const [data, setData] = useStickyState([], 'gratitudes');
-    const [dataAth, setDataAth] = useStickyState([], 'author');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(true);
     
-    const addGratitude = (newGratitude) => {
-        setData([...data, newGratitude])
+    useEffect(() => {
+        fetchGratitudes();
+    }, [data])
+
+    const fetchGratitudes = async () => {
+        let { data, error } = await supabase
+            .from('gratitudes')
+            .select('entry, date_insert_ts')
+
+        if (error) setError(error.message)
+        else {
+            setData(data)
+            setLoading(false)
+        }
+      }
+    
+      const addGratitude = async (newGratitude) => {
+        setLoading(true)
+        if (newGratitude.length) {
+            let { data, error } = await supabase
+              .from('gratitudes')
+              .insert([
+              { id: user.id, entry: newGratitude },
+              ])
+            if (error) setError(error.message)
+            else { 
+                // setGratitudes([...gratitudes, {'entry':entry,'date_insert_ts':'NULL'}])
+                setLoading(false)
+            }
+          }
     }
 
 
