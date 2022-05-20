@@ -1,21 +1,21 @@
 import {useState} from "react"
 import styled from "styled-components"
 
-export default function Input({ addGratitude }) {
+export default function Input({ addComment }) {
     const [value, setValue] = useState("");
     const [ath, setAth] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
-        addGratitude(value);
+        addComment(value);
         setValue("");
         setAth("");
     }
 
     return (
         <Form onSubmit={handleSubmit}>
-            <label htmlFor="new-gratitude">Sign the Wall</label>
-            <input maxLength={40} id="new-gratitude" value={value} onChange={(e) => setValue(e.target.value)}/>
+            <label htmlFor="new-comment">Sign the Wall</label>
+            <input maxLength={40} id="new-comment" value={value} onChange={(e) => setValue(e.target.value)}/>
         </Form>
     )
 }

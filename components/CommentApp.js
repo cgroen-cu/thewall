@@ -4,20 +4,15 @@ import Input from "./Input";
 import styled from "styled-components"
 import DecorativeLineBreak from "./DecorativeLineBreak";
 
-const test = [
-    'finger picked guitar',
-    'hot tea',
-    'birdsong'
-]
 
 
-export default function GratitudeApp() {
+export default function CommentApp() {
     // instead of just a default value, also provide a key
-    const [data, setData] = useStickyState([], 'gratitudes');
+    const [data, setData] = useStickyState([], 'comments');
     const [dataAth, setDataAth] = useStickyState([], 'author');
 
-    const addGratitude = (newGratitude) => {
-        setData([...data, newGratitude])
+    const addComment = (newComment) => {
+        setData([...data, newComment])
     }
 
 
@@ -38,7 +33,7 @@ export default function GratitudeApp() {
                         <Spacer height={40} />
                     )
                 }
-                <Input addGratitude={addGratitude}/>
+                <Input addComment={addComment}/>
             </DecorativeArc>
     </Wrapper>
 }
@@ -63,7 +58,6 @@ const Column = styled.div`
 const DecorativeArc = styled.div`
     border: 5px solid lightgreen;
     background-color: rgb(10,10,10);
-    text-align: center;
     width: min(100%, 800px);
     padding: 20px 10%;
 `

@@ -9,7 +9,7 @@ export default function History({ data }) {
                     {d}
                 </Entry>
             ))) : (
-                <p>No gratitudes.</p>
+                <p>No Comments.</p>
             )
         }
         </List>
@@ -26,7 +26,5 @@ const List = styled.ol`
 const Entry = styled.li`
     padding: 10px;
     font-size: 1.2rem;
-    &:not(:last-of-type) {
-        border-bottom: 1px solid var(--rose);
-    }
+    border: 1px solid lightgreen;
 `
