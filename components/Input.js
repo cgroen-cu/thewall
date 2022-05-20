@@ -36,7 +36,7 @@ const Form = styled.form`
         color: white;
         font-size: inherit;
         padding: 10px;
-        border: 3px solid var(--burnt);
+        border: 3px solid lightgreen;
         border-radius: 5px;
     }
 `
